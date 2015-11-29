@@ -20,5 +20,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="TEST" name="org.mockito:mockito-all:1.9.5" level="project" />
   </component>
 </module>
