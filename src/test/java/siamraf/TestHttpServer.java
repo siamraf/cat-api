@@ -44,8 +44,8 @@ public class TestHttpServer implements HttpHandler {
         String response = pathResponses.get(path);
         OutputStream os = exchange.getResponseBody();
         if (response == null) {
-            exchange.sendResponseHeaders(500, 0);
             response = "No response mapped for path " + path;
+            exchange.sendResponseHeaders(500, response.length());
         } else {
             exchange.sendResponseHeaders(200, response.length());
         }
