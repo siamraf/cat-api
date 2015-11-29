@@ -20,7 +20,25 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="TEST" name="org.mockito:mockito-all:1.9.5" level="project" />
-    <orderEntry type="library" name="com.google.code.gson:gson:2.5" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library type="repository">
+        <properties maven-id="org.mockito:mockito-all:1.9.5" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/mockito-all-1.9.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library type="repository">
+        <properties maven-id="com.google.code.gson:gson:2.5" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/gson-2.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
