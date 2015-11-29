@@ -1,4 +1,4 @@
-package siamraf;
+package siamraf.category;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;

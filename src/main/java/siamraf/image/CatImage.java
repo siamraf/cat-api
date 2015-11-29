@@ -1,4 +1,4 @@
-package siamraf;
+package siamraf.image;
 
 public class CatImage {
     private final String imageLocation;

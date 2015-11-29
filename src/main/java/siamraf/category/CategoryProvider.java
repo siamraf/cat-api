@@ -1,4 +1,4 @@
-package siamraf;
+package siamraf.category;
 
 import java.util.List;
 

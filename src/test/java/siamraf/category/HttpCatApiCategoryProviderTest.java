@@ -1,8 +1,9 @@
-package siamraf;
+package siamraf.category;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import siamraf.testutil.TestHttpServer;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -90,7 +91,7 @@ public class HttpCatApiCategoryProviderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getBadlyFormattedResponse() throws Exception {
+    public void throwExceptionOnBadlyFormattedResponse() throws Exception {
         // given
         httpServer.respondToPathWith(CATEGORIES_PATH, "computer says no");
 

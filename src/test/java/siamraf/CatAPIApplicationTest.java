@@ -5,6 +5,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
+import siamraf.category.CategoryProvider;
+import siamraf.fact.CatFactProvider;
+import siamraf.image.CatImage;
+import siamraf.image.CatImageProvider;
 
 import java.io.File;
 import java.io.PipedInputStream;

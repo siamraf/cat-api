@@ -1,5 +1,10 @@
 package siamraf;
 
+import siamraf.category.CategoryProvider;
+import siamraf.fact.CatFactProvider;
+import siamraf.image.CatImage;
+import siamraf.image.CatImageProvider;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;

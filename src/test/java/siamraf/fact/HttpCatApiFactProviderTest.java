@@ -1,8 +1,9 @@
-package siamraf;
+package siamraf.fact;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import siamraf.testutil.TestHttpServer;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -45,7 +46,7 @@ public class HttpCatApiFactProviderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getBadlyFormattedFact() throws Exception {
+    public void throwExceptionOnBadlyFormattedResponse() throws Exception {
         // given
         httpServer.respondToPathWith(FACT_PATH, "Durp durp");
 
