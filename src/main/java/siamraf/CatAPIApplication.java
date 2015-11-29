@@ -1,7 +1,12 @@
 package siamraf;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -9,13 +14,19 @@ import java.util.List;
 public class CatAPIApplication {
 
     private final CatFactProvider factProvider;
-    private PrintWriter output;
-    private CategoryProvider categoryProvider;
+    private final CatImageProvider imageProvider;
+    private final File imageDir;
+    private final PrintWriter output;
+    private final CategoryProvider categoryProvider;
 
     public CatAPIApplication(OutputStream outputStream,
                              CategoryProvider categoryProvider,
-                             CatFactProvider factProvider) {
+                             CatFactProvider factProvider,
+                             CatImageProvider imageProvider,
+                             File imageDir) {
         this.factProvider = factProvider;
+        this.imageProvider = imageProvider;
+        this.imageDir = imageDir;
         this.output = new PrintWriter(outputStream);
         this.categoryProvider = categoryProvider;
     }
@@ -29,8 +40,18 @@ public class CatAPIApplication {
     }
 
     public void printFact() {
-        output.println(factProvider.getFact());
+        printAndFlush(factProvider.getFact());
+    }
+
+    private void printAndFlush(String fact) {
+        output.println(fact);
         output.flush();
     }
 
+    public void saveCatImage() throws IOException {
+        CatImage catImage = imageProvider.getImageInputStream();
+        Path localImagePath = imageDir.toPath().resolve(catImage.getImageName());
+        Files.write(localImagePath, catImage.getImageData(), StandardOpenOption.CREATE);
+        printAndFlush("Image from " + catImage.getImageLocation() + " saved to " + localImagePath.toUri());
+    }
 }
