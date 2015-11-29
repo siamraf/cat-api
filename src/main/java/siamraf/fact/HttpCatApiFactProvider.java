@@ -46,18 +46,15 @@ public class HttpCatApiFactProvider implements CatFactProvider {
     }
 
     private void cleanup(HttpURLConnection conn, InputStreamReader inputStreamReader) {
+        if (inputStreamReader != null) {
+            try {
+                inputStreamReader.close();
+            } catch (IOException ignored) {
+            }
+        }
         if (conn != null) {
             conn.disconnect();
         }
-        if (inputStreamReader != null) {
-            closeQuietly(inputStreamReader);
-        }
     }
 
-    private void closeQuietly(InputStreamReader inputStreamReader) {
-        try {
-            inputStreamReader.close();
-        } catch (IOException e) {
-        }
-    }
 }

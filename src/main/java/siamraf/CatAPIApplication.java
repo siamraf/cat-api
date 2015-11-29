@@ -36,6 +36,12 @@ public class CatAPIApplication {
         this.categoryProvider = categoryProvider;
     }
 
+    public static void main(String[] args) {
+        if (args.length != 1) {
+
+        }
+    }
+
     public void printCategories() {
         List<String> categories = categoryProvider.getCategories();
         Collections.sort(categories, Comparator.naturalOrder());
@@ -54,7 +60,7 @@ public class CatAPIApplication {
     }
 
     public void saveCatImage() throws IOException {
-        CatImage catImage = imageProvider.getImageInputStream();
+        CatImage catImage = imageProvider.getCatImage();
         Path localImagePath = imageDir.toPath().resolve(catImage.getImageName());
         Files.write(localImagePath, catImage.getImageData(), StandardOpenOption.CREATE);
         printAndFlush("Image from " + catImage.getImageLocation() + " saved to " + localImagePath.toUri());

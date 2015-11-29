@@ -92,7 +92,7 @@ public class CatAPIApplicationTest {
         byte[] myCatImage = "<( ^ . ^ )>  meow".getBytes(StandardCharsets.UTF_8);
         String imageName = "fakeImage.png";
         String imageLocation = "/test/location";
-        given(imageProvider.getImageInputStream()).willReturn(new CatImage(imageLocation, imageName, myCatImage));
+        given(imageProvider.getCatImage()).willReturn(new CatImage(imageLocation, imageName, myCatImage));
 
         // when
         catApi.saveCatImage();

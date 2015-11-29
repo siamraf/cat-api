@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,14 +31,31 @@ public class HttpCatApiCategoryProvider implements CategoryProvider {
 
     @Override
     public List<String> getCategories() {
+        HttpURLConnection conn = null;
+        InputStream inputStream = null;
         try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(httpUrl).openConnection();
-            Document document = documentBuilder.parse(conn.getInputStream());
+            conn = (HttpURLConnection) new URL(httpUrl).openConnection();
+            inputStream = conn.getInputStream();
+            Document document = documentBuilder.parse(inputStream);
             return getCategoryNames(document);
         } catch (IOException e) {
             throw new RuntimeException("Failed to get categories from server");
         } catch (SAXException e) {
             throw new RuntimeException("Failed to parse response from server");
+        } finally {
+            cleanup(conn, inputStream);
+        }
+    }
+
+    private void cleanup(HttpURLConnection conn, InputStream inputStream) {
+        if (inputStream != null) {
+            try {
+                inputStream.close();
+            } catch (IOException ignored) {
+            }
+        }
+        if (conn != null) {
+            conn.disconnect();
         }
     }
 

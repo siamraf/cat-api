@@ -40,7 +40,7 @@ public class TestHttpServer implements HttpHandler {
 
     @Override
     public synchronized void handle(HttpExchange exchange) throws IOException {
-        String path = exchange.getRequestURI().getPath();
+        String path = exchange.getRequestURI().getRawPath();
         String response = pathResponses.get(path);
         OutputStream os = exchange.getResponseBody();
         if (response == null) {
