@@ -23,6 +23,7 @@ public class CatAPIApplicationTest {
     private Scanner readFromProcess;
     private CatAPIApplication catApi;
     private CategoryProvider categoryProvider;
+    private CatFactProvider factProvider;
 
     @Before
     public void setUp() throws Exception {
@@ -30,8 +31,9 @@ public class CatAPIApplicationTest {
         PipedInputStream source = new PipedInputStream(output);
 
         categoryProvider = mock(CategoryProvider.class);
+        factProvider = mock(CatFactProvider.class);
         readFromProcess = new Scanner(source);
-        catApi = new CatAPIApplication(output, categoryProvider);
+        catApi = new CatAPIApplication(output, categoryProvider, factProvider);
     }
 
     @Test
@@ -48,6 +50,19 @@ public class CatAPIApplicationTest {
         expectRead("hats");
         expectRead("space");
         expectRead("ties");
+    }
+
+    @Test
+    public void shouldPrintCatFact() throws Exception {
+        // given
+        String fact = "Today there are about 100 distinct breeds of the domestic cat.";
+        given(factProvider.getFact()).willReturn(fact);
+
+        // when
+        catApi.printFact();
+
+        // then
+        expectRead(fact);
     }
 
     private void expectRead(String expect) {
