@@ -72,7 +72,7 @@ public class CatAPIApplication {
     }
 
     private static void printUsage() {
-        System.out.println("Usage:\n jar CatAPI.jar [ file | categories | fact ]");
+        System.out.println("Usage:\n run.sh [ file | categories | fact ]");
     }
 
     public void printCategories() {
